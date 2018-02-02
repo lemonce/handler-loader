@@ -1,5 +1,5 @@
 'use strict';
-const ajv = require('ajv');
+const Ajv = require('ajv');
 
 function registerHandler(handlerPathname, namespace) {
 	const handler = require(handlerPathname);
@@ -9,6 +9,21 @@ function registerHandler(handlerPathname, namespace) {
 	}
 
 	namespace[handler.name] = handler;
+}
+
+function ValidateHandlerFactory(schemas, property) {
+	const ajv = new Ajv();
+	const validate = ajv.compile(schemas);
+
+	return function validateHandler(err, req, res, next) {
+
+		if (!validate(req[property])) {
+			res.status(400).json(validate.errors);
+		}
+
+		next();
+	};
+
 }
 
 module.exports = class Namespace {
@@ -30,16 +45,7 @@ module.exports = class Namespace {
 	 */
 
 	$testParams(schemas) {
-		const validate = ajv.compile(schemas);
-
-		return function (err, req, res, next) {
-
-			if (!validate(req.params)) {
-				res.status(400).json(validate.errors);
-			}
-
-			next();
-		}
+		return ValidateHandlerFactory(schemas, 'params');
 	}
 
 	/**
@@ -48,16 +54,7 @@ module.exports = class Namespace {
 	 */
 
 	$testQuery(schemas) {
-		const validate = ajv.compile(schemas);
-
-		return function (err, req, res, next) {
-
-			if (!validate(req.query)) {
-				res.status(400).json(validate.errors);
-			}
-
-			next();
-		}
+		return ValidateHandlerFactory(schemas, 'query');
 	}
 
 	/**
@@ -66,15 +63,6 @@ module.exports = class Namespace {
 	 */
 
 	$testBody(schemas) {
-		const validate = ajv.compile(schemas);
-
-		return function (err, req, res, next) {
-
-			if (!validate(req.body)) {
-				res.status(400).json(validate.errors);
-			}
-
-			next();
-		}
+		return ValidateHandlerFactory(schemas, 'body');
 	}
 }

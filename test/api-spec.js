@@ -4,13 +4,18 @@ const handler = require('../index');
 const {remove, resolve} = handler;
 
 const assert = require('assert');
+const path = require('path');
 
-describe('manage handler test', function() {
+describe.only('api test', function() {
+
+	const pathname = path.resolve(__dirname, './assets');
 
 	describe('resolve handler test', function() {
 
 		it('should return an array include 3 element',function() {
-			const option = {pathname:'./test/handler'};
+			const option = {
+				pathname: pathname
+			};
 			const resolvedList = resolve(option);
 
 			assert.equal(resolvedList.length, 3);
@@ -19,8 +24,8 @@ describe('manage handler test', function() {
 
 		it('exclude',function() {
 			const option = {
-				pathname:'./test/handler',
-				exclude:/\one.js$/
+				pathname: pathname,
+				exclude: /\one.js$/
 			};
 			const resolvedList = resolve(option);
 
@@ -29,9 +34,13 @@ describe('manage handler test', function() {
 		});
 	});
 
-	describe('get handler test', function() {
+	describe('requireHanlder handler test', function() {
 
-		it('it should return an object')
+		it('');
+		it('');
+		it('');
+		it('');
+		it('');
 	});
 
 	describe('remove handler test', function() {
