@@ -13,11 +13,11 @@ This module provide an interface object with two methods.
 
 This interface method have two arguments,and the usefuness of this interface method is different when the number of arguments changed.
 
-### namespace
+### namespace(argument 0)
 
 If you use method only with this argument,you can query namespace that created.This argument is string.
 
-### option
+### option(argument 1)
 
 If you use method with two arguments,you can create a new namespace.This argument is a object with attributes `pathname` and `exclude`.Pathname is the path that handlers located those will be loaded.Exclude is the condition to filter the handlers.
 
@@ -25,7 +25,7 @@ If you use method with two arguments,you can create a new namespace.This argumen
 
 This method is used to create an array include the absolute path of file.
 
-### option
+### option(argument)
 
 This argument is the same with the above `option`.
 
@@ -33,7 +33,7 @@ This argument is the same with the above `option`.
 
 This method is used to delete that created.
 
-### namespace
+### namespace(argument)
 
 This argument is the same with the above `namespace`.
 

@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const handlerLoader = require('../');
-const {resolve, remove} = handlerLoader;
 
 const pathname = path.resolve(__dirname, './handler');
 const app = module.exports = express();
@@ -48,7 +47,3 @@ app.listen(5000);
 app.get('/:id', example.$testParams(paramsSchema), example.paramsHandler);
 app.get('/', example.$testQuery(querySchema), example.queryHandler);
 app.post('/', example.$testBody(bodySchema), example.bodyHandler);
-
-const pathnameList = resolve({
-	pathname: pathname
-});
