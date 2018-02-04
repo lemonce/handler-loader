@@ -9,7 +9,6 @@ describe('readdir test', function () {
 
 	const pathname = path.resolve(__dirname, './assets');
 
-	console.log(pathname);
 	it('return pathnameList', function () {
 
 		const pathnameList = readdir(pathname);

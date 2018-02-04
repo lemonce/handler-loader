@@ -1,10 +1,11 @@
 {
   "name": "express-handler-loader",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "centralized handler loading",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "example": "node ./example"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   "homepage": "https://github.com/lemonce/handler-loader#readme",
   "dependencies": {
     "ajv": "^6.1.1",
-    "debug": "^3.1.0"
+    "debug": "^3.1.0",
+    "express": "^4.16.2"
   },
   "directories": {
     "test": "test"
