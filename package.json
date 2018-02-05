@@ -1,6 +1,6 @@
 {
-  "name": "express-handler-loader",
-  "version": "0.1.4",
+  "name": "express-middleweaver",
+  "version": "0.1.0",
   "description": "centralized handler loading",
   "main": "index.js",
   "scripts": {

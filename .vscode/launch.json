@@ -23,6 +23,10 @@
 				"--colors",
 				"${workspaceFolder}/test"
 			],
+			"env": {
+				"DEBUG": "*,-mocha:*,-not_this"
+			},
+			"outputCapture": "std",
 			"internalConsoleOptions": "openOnSessionStart"
 		},
 		{

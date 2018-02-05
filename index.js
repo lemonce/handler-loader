@@ -2,6 +2,8 @@
 const Namespace = require('./src/namespace');
 const readdirRecursiveSync = require('./src/readdir');
 
+const debug = require('debug')('express-handler-loader:');
+
 const namespaceStore = {};
 
 function excludePathname(pathnameList, exclude = /\s/) {
@@ -48,9 +50,12 @@ const $ = module.exports = function requireHanlder(namespace, options) {
 		
 		const pathnameList = getRequireList(options);
 
-		namespaceStore[namespace] = new Namespace(pathnameList);
-		
-	} else if (!namespaceStore[namespace]) {
+		debug('Construct new namespace %o', namespace);
+
+		return namespaceStore[namespace] = new Namespace(pathnameList);
+	} 
+	
+	if (!namespaceStore[namespace]) {
 		throw new Error('This namespace is not exsited.');
 	}
 
