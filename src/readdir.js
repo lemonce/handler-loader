@@ -20,6 +20,7 @@ function readDirectory(pathname) {
 	}).forEach(pathname => {
 		try {
 			const stats = fs.statSync(pathname);
+			
 			if (stats.isDirectory()) {
 				return pathnameList = 
 					pathnameList.concat(readDirectory(pathname));

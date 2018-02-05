@@ -5,6 +5,12 @@ handler-loader
 
 This module make handlers loading easier and it can validate some data format.
 
+# Installation
+
+```bash
+$ npm install --save express-handler-loader
+```
+
 # Use
 
 This module provide an interface object with two methods.
@@ -55,4 +61,6 @@ Documentation: https://www.npmjs.com/package/debug
 
 ## CLI
 
-npm run example
+```bash
+$ npm run example
+```
