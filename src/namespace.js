@@ -41,6 +41,33 @@ module.exports = class Namespace {
 
 	/**
 	 * 
+	 * @param {string} name
+	 */
+
+	$register(name, middleware) {
+
+		if (typeof name !== 'string') {
+			throw new Error('A string excepted by argument 0.');
+		}
+
+		if (middleware) {
+			if (this[name]) {
+				throw new Error('This name has been registed.');
+			}
+
+			if (typeof middleware !== 'function') {
+				throw new Error('A function excepted by argument 1.');
+			}
+
+			this[name] = middleware;
+		} else {
+			throw new Error('Argument 1 is required');
+		}
+
+	}
+
+	/**
+	 * 
 	 * @param {string} schemas
 	 */
 

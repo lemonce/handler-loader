@@ -26,6 +26,52 @@ describe('class test', function () {
 		assert(namespace.handlerThree);
 	});
 
+	describe('register test', function () {
+
+		it('register middleware', function () {
+			namespace.$register('testHandler',function test() {
+				return 1;
+			});
+	
+			assert.equal(namespace.testHandler(), 1);
+		});
+
+		it('argument 0 exception', function () {
+			try {
+				namespace.$register(123);
+			} catch (error) {
+				assert.equal(error.message, 'A string excepted by argument 0.');
+			}
+		});
+
+		it('argument 1 missing',function () {
+			try {
+				namespace.$register('test2');
+			} catch (error) {
+				assert.equal(error.message, 'Argument 1 is required');
+			}
+		});
+
+		it('the type of argument 1 with exception', function () {
+			try {
+				namespace.$register('test2', 'function');
+			} catch (error) {
+				assert.equal(error.message, 'A function excepted by argument 1.');
+			}
+		});
+
+		it('register exception', function () {
+			try {
+				namespace.$register('testHandler',function test() {
+					return 2;
+				});
+			} catch (error) {
+				assert.equal(error.message, 'This name has been registed.');
+			}
+		});
+
+	});
+
 	const schemas = {
 		"properties": {
 			"foo": {

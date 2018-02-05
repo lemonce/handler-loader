@@ -45,7 +45,7 @@ This argument is the same with the above `namespace`.
 
 ## namespace
 
-This an object that has you loaded handlers as attributes and three prototype methods: `$testParams`,`$testQuery`,`$testBody`.These three methods use ajv schema as argument and return a handler to validate data format.
+This an object that has you loaded handlers as attributes and four prototype methods:`$register`,`$testParams`,`$testQuery`,`$testBody`.These three methods use ajv schema as argument and return a handler to validate data format.
 
 # Application Side
 
@@ -59,8 +59,7 @@ Documentation: https://www.npmjs.com/package/debug
 
 # Example
 
-## CLI
-
 ```bash
-$ npm run example
+const loader = require('express-handler-loader');
+{resolve, remove} = loader;
 ```
