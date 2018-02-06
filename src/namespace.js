@@ -1,5 +1,18 @@
 'use strict';
 const Ajv = require('ajv');
+const wrap = require('co-express');
+
+function dealwithGenerator(middleware) {
+
+	if (middleware.constructor.name === 'GeneratorFunction') {
+		const fn = wrap(middleware);
+		
+		return fn;
+	}
+	
+	return middleware;
+	
+}
 
 function registerHandler(handlerPathname, namespace) {
 	const handler = require(handlerPathname);
@@ -8,7 +21,8 @@ function registerHandler(handlerPathname, namespace) {
 		return;
 	}
 
-	namespace[handler.name] = handler;
+	namespace[handler.name] = dealwithGenerator(handler);
+
 }
 
 function ValidateHandlerFactory(schemas, property) {
@@ -42,6 +56,7 @@ module.exports = class Namespace {
 	/**
 	 * 
 	 * @param {string} name
+	 * @param {Function} middleware
 	 */
 
 	$register(name, middleware) {
@@ -59,7 +74,7 @@ module.exports = class Namespace {
 				throw new Error('A function excepted by argument 1.');
 			}
 
-			this[name] = middleware;
+			this[name] = dealwithGenerator(middleware);
 		} else {
 			throw new Error('Argument 1 is required');
 		}
@@ -91,5 +106,22 @@ module.exports = class Namespace {
 
 	$testBody(schemas) {
 		return ValidateHandlerFactory(schemas, 'body');
+	}
+
+	/**
+	 * 
+	 * @param {string} methodName
+	 */
+
+	$isAllowed(methodName) {
+		return function (req, res, next) {
+			if (req.method.toLowerCase() !== methodName) {
+				res.status(405).json({
+					Allow: methodName
+				});
+			}
+			
+			next();
+		}
 	}
 }

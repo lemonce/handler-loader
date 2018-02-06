@@ -1,6 +1,6 @@
 {
-  "name": "express-middleweaver",
-  "version": "0.1.0",
+  "name": "express-handler-loader",
+  "version": "0.1.6",
   "description": "centralized handler loading",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/lemonce/handler-loader#readme",
   "dependencies": {
     "ajv": "^6.1.1",
+    "co-express": "^2.0.0",
     "debug": "^3.1.0",
     "express": "^4.16.2"
   },

@@ -1,3 +1,4 @@
-module.exports = function handlerTwo() {
+module.exports = function* handlerTwo(req, res, next) {
+
 	return 2;
 };

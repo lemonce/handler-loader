@@ -13,13 +13,13 @@ describe('api test', function () {
 
 	describe('resolve api test', function () {
 
-		it('should return an array include 3 element',function () {
+		it('should return an array include 4 element',function () {
 			const option = {
 				pathname: pathname
 			};
 			const pathnameList = resolve(option);
 
-			assert.equal(pathnameList.length, 3);
+			assert.equal(pathnameList.length, 4);
 			assert.equal(Array.isArray(pathnameList), true);
 
 			pathnameList.forEach(pathname => {
@@ -34,7 +34,7 @@ describe('api test', function () {
 			};
 			const pathnameList = resolve(option);
 
-			assert.equal(pathnameList.length, 2);
+			assert.equal(pathnameList.length, 3);
 			assert.equal(Array.isArray(pathnameList), true);
 
 			pathnameList.forEach(pathname => {

@@ -16,14 +16,29 @@ describe('class test', function () {
 	
 	let namespace;
 	
-	it('handler mounted', function () {
+	describe('handler mounted', function () {
 		namespace = new Namespace(pathnameList.map(pathname => {
 			return path.resolve(basePath, pathname);
 		}));
 
-		assert(namespace.handlerOne);
-		assert(namespace.handlerTwo);
-		assert(namespace.handlerThree);
+		it('mounted successful', function () {
+			
+			assert(namespace.handlerOne);
+			assert(namespace.handlerTwo);
+			assert(namespace.handlerThree);
+			assert.equal(typeof namespace.handlerFour, 'undefined');
+		});
+
+		it('mounted generator function', function () {
+
+			const {
+				handlerTwo
+			} = namespace;
+
+			const result = handlerTwo(null, null, function () {}).constructor.name;
+
+			assert.equal(result, 'Promise');
+		});
 	});
 
 	describe('register test', function () {
@@ -68,6 +83,16 @@ describe('class test', function () {
 			} catch (error) {
 				assert.equal(error.message, 'This name has been registed.');
 			}
+		});
+
+		it('register a Generator function', function () {
+			namespace.$register('generator', function* test(req, res, next) {
+				next();
+			});
+
+			const result = namespace.generator(null, null, function () {}).constructor.name;
+
+			assert.equal(result, 'Promise');
 		});
 
 	});
@@ -213,5 +238,24 @@ describe('class test', function () {
 		const testHandler = namespace.$testBody(schemas);
 
 		testHandler(null, req, resMock, () => {});
+	});
+
+	it('isAllowed test', function () {
+		const isAllowed = namespace.$isAllowed('post');
+
+		const req = {
+			method: 'get'
+		};
+
+		const resMock = {
+			status() {
+				return this;
+			},
+			json(object) {
+				assert.equal(object.Allow, 'post');
+			}
+		};	
+		
+		isAllowed(req, resMock, () => {});
 	});
 });

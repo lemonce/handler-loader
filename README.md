@@ -45,7 +45,27 @@ This argument is the same with the above `namespace`.
 
 ## namespace
 
-This an object that has you loaded handlers as attributes and four prototype methods:`$register`,`$testParams`,`$testQuery`,`$testBody`.These three methods use ajv schema as argument and return a handler to validate data format.
+This an object that has you loaded handlers as attributes and four prototype methods:`$register`,`$testParams`,`$testQuery`,`$testBody`,`$isAllowed`.These three methods use ajv schema as argument and return a handler to validate data format.
+
+### $register
+
+It is used to register middlewave by yourself.
+
+### $testParams
+
+It is used to validate the data format of req.params.
+
+### $testQuery
+
+It is used to validate the data format of req.query.
+
+### $testBody
+
+It is used to validate the data format of req.body.
+
+### $isAllowed
+
+It is return status 405 when the clientsend a request that not match the mappedHTTP method.
 
 # Application Side
 

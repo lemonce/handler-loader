@@ -13,7 +13,7 @@ describe('readdir test', function () {
 
 		const pathnameList = readdir(pathname);
 
-		assert.equal(pathnameList.length, 3);
+		assert.equal(pathnameList.length, 4);
 
 		pathnameList.forEach(pathname => {
 			assert(path.isAbsolute(pathname));
