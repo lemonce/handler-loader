@@ -2,18 +2,6 @@
 const Ajv = require('ajv');
 const wrap = require('co-express');
 
-function dealwithGenerator(middleware) {
-
-	if (middleware.constructor.name === 'GeneratorFunction') {
-		const fn = wrap(middleware);
-		
-		return fn;
-	}
-	
-	return middleware;
-	
-}
-
 function registerHandler(handlerPathname, namespace) {
 	const handler = require(handlerPathname);
 
@@ -21,8 +9,11 @@ function registerHandler(handlerPathname, namespace) {
 		return;
 	}
 
-	namespace[handler.name] = dealwithGenerator(handler);
-
+	if (handler.constructor.name === 'GeneratorFunction') {
+		namespace[handler.name] = wrap(handler  );
+	} else {
+		namespace[handler.name] = handler;
+	}
 }
 
 function ValidateHandlerFactory(schemas, property) {
@@ -56,7 +47,6 @@ module.exports = class Namespace {
 	/**
 	 * 
 	 * @param {string} name
-	 * @param {Function} middleware
 	 */
 
 	$register(name, middleware) {
@@ -74,7 +64,7 @@ module.exports = class Namespace {
 				throw new Error('A function excepted by argument 1.');
 			}
 
-			this[name] = dealwithGenerator(middleware);
+			this[name] = middleware;
 		} else {
 			throw new Error('Argument 1 is required');
 		}

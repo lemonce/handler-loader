@@ -35,9 +35,19 @@ describe('class test', function () {
 				handlerTwo
 			} = namespace;
 
-			const result = handlerTwo(null, null, function () {}).constructor.name;
+			handlerTwo(null, null, function () {}).then(result => {
+				assert.equal(result, 2);
+			});
+		});
 
-			assert.equal(result, 'Promise');
+		it('mounted async function', function () {
+			const {
+				handlerOne
+			} = namespace;
+
+			handlerOne(1000).then(result => {
+				assert.equal(result, 3);
+			});
 		});
 	});
 
@@ -84,17 +94,6 @@ describe('class test', function () {
 				assert.equal(error.message, 'This name has been registed.');
 			}
 		});
-
-		it('register a Generator function', function () {
-			namespace.$register('generator', function* test(req, res, next) {
-				next();
-			});
-
-			const result = namespace.generator(null, null, function () {}).constructor.name;
-
-			assert.equal(result, 'Promise');
-		});
-
 	});
 
 	const schemas = {
