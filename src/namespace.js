@@ -20,16 +20,18 @@ function ValidateHandlerFactory(schemas, property) {
 	const ajv = new Ajv();
 	const validate = ajv.compile(schemas);
 
-	return function validateHandler(error, req, res, next) {
-
+	return function validateHandler(req, res, next) {
+		
 		if (!validate(req[property])) {
 			res.status(400).json(validate.errors);
+
+			return;
 		}
 
 		next();
 	};
 
-}
+}  
 
 module.exports = class Namespace {
 	/**

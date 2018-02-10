@@ -126,7 +126,11 @@ describe('class test', function () {
 
 		const testHandler = namespace.$testParams(schemas);
 
-		testHandler(null, req, resMock, () => {});
+		const result = testHandler(req, resMock, () => {
+			return 1;
+		});
+
+		assert.equal(result, undefined);
 	});
 	
 	it('testParams successfully', function () {
@@ -137,18 +141,17 @@ describe('class test', function () {
 			}
 		};
 
-		const resMock = {
-			status() {
-				return this;
-			},
-			json(errors) {
-				assert.equal(errors.length, 0);
-			}
-		};
+		const resMock = null;
 
 		const testHandler = namespace.$testParams(schemas);
 
-		testHandler(null, req, resMock, () => {});
+		let result;
+		
+		testHandler(req, resMock, () => {
+			result = 1;
+		});
+
+		assert.equal(result, 1);
 	});
 
 	it('testQuery with exception', function () {
@@ -170,7 +173,11 @@ describe('class test', function () {
 
 		const testHandler = namespace.$testQuery(schemas);
 
-		testHandler(null, req, resMock, () => {});
+		const result = testHandler(req, resMock, () => {
+			return 1;
+		});
+
+		assert.equal(result, undefined);
 	});
 
 	it('testQuery successfully', function () {
@@ -181,18 +188,17 @@ describe('class test', function () {
 			}
 		};
 
-		const resMock = {
-			status() {
-				return this;
-			},
-			json(errors) {
-				assert.equal(errors.length, 0);
-			}
-		};
+		const resMock = null;
 
 		const testHandler = namespace.$testQuery(schemas);
 
-		testHandler(null, req, resMock, () => {});
+		let result;
+		
+		testHandler(req, resMock, () => {
+			result = 1;
+		});
+
+		assert.equal(result, 1);
 	});
 
 	it('testBody with exception', function () {
@@ -214,7 +220,11 @@ describe('class test', function () {
 
 		const testHandler = namespace.$testBody(schemas);
 
-		testHandler(null, req, resMock, () => {});
+		const result = testHandler(req, resMock, () => {
+			return 1;
+		});
+
+		assert.equal(result, undefined);
 	});
 
 	it('testBody successfully', function () {
@@ -225,18 +235,17 @@ describe('class test', function () {
 			}
 		};
 
-		const resMock = {
-			status() {
-				return this;
-			},
-			json(errors) {
-				assert.equal(errors.length, 0);
-			}
-		};
+		const resMock = null;
 
 		const testHandler = namespace.$testBody(schemas);
 
-		testHandler(null, req, resMock, () => {});
+		let result;
+		
+		testHandler(req, resMock, () => {
+			result = 1;
+		});
+
+		assert.equal(result, 1);
 	});
 
 	it('isAllowed test', function () {
