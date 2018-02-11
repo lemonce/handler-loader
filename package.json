@@ -1,6 +1,6 @@
 {
   "name": "express-handler-loader",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "centralized handler loading",
   "main": "index.js",
   "scripts": {

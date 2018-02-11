@@ -16,12 +16,12 @@ function registerHandler(handlerPathname, namespace) {
 	}
 }
 
-function ValidateHandlerFactory(schemas, property) {
+function ValidateHandlerFactory(schemas = {}, property) {
 	const ajv = new Ajv();
 	const validate = ajv.compile(schemas);
 
 	return function validateHandler(req, res, next) {
-		
+
 		if (!validate(req[property])) {
 			res.status(400).json(validate.errors);
 
@@ -31,7 +31,7 @@ function ValidateHandlerFactory(schemas, property) {
 		next();
 	};
 
-}  
+}
 
 module.exports = class Namespace {
 	/**
