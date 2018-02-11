@@ -10,14 +10,14 @@ function registerHandler(handlerPathname, namespace) {
 	}
 
 	if (handler.constructor.name === 'GeneratorFunction') {
-		namespace[handler.name] = wrap(handler  );
+		namespace[handler.name] = wrap(handler);
 	} else {
 		namespace[handler.name] = handler;
 	}
 }
 
-function ValidateHandlerFactory(schemas = {}, property) {
-	const ajv = new Ajv();
+function ValidateHandlerFactory(schemas, property) {
+	const ajv = new Ajv({ useDefaults: true });
 	const validate = ajv.compile(schemas);
 
 	return function validateHandler(req, res, next) {

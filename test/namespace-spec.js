@@ -266,23 +266,4 @@ describe('class test', function () {
 		
 		isAllowed(req, resMock, () => {});
 	});
-
-	it('test with default in ajv', function () {
-		const testHandler = namespace.$testBody();
-
-		const req = {
-			body: {
-				foo: 123,
-				bar: 'abc'
-			}
-		};
-
-		let result;
-		
-		testHandler(req, null, () => {
-			result = 1;
-		});
-
-		assert.equal(result, 1);
-	});
 });
